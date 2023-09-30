@@ -9,7 +9,6 @@ public:
 
 	void init() {
 		hash_ = 0x811c9dc5;
-		prime_ = 0x1000193;
 	}
 
 	uint32_t read() {
@@ -26,7 +25,7 @@ public:
 
 private:
 	 uint32_t hash_;
-	 uint32_t prime_;
+	 static const uint32_t prime_ = 0x1000193;
 };
 
 #endif
