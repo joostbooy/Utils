@@ -3,8 +3,7 @@
 
 //Random number generation
 
-#include "stmf4lib.h"
-#include "lookupTables.h"
+#include <stdint.h>
 
 class Rng {
 
@@ -29,14 +28,21 @@ public:
 	}
 
 	static inline uint16_t u16(uint16_t min, uint16_t max) {
-		if (min > max) { swap(min, max); }
+		if (min > max) {
+			swap(min, max);
+		}
 		return (reciprocal() * (max - min + 1)) + min;
 	}
 
 private:
 	static uint16_t seed_;
-};
 
-extern Rng rng;
+	static inline void swap(uint16_t &a, uint16_t &b) {
+		uint16_t temp = a;
+		a = b;
+		b = temp;
+	}
+
+};
 
 #endif
