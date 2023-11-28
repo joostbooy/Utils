@@ -15,7 +15,7 @@ public:
 		return hash_;
 	}
 
-	void write(void *data, uint32_t size) {
+	void write(void *data, size_t size) {
 		uint8_t *data_ = static_cast<uint8_t *>(data);
 		while (size--) {
 			hash_ ^= *data_++;
@@ -25,7 +25,7 @@ public:
 
 private:
 	 uint32_t hash_;
-	 static const uint32_t prime_ = 0x1000193;
+	 static const size_t prime_ = 0x1000193;
 };
 
 #endif
