@@ -23,6 +23,14 @@ public:
 		return phase < 0.5f ? phase * 2.f : (1.f - phase) * 2.f;
 	}
 
+	static inline float triangle(float phase, float skew) {
+		if (phase < skew) {
+			return phase * (1.0f / skew);
+		} else {
+			return 1.0f - (phase - skew) * (1.0f / (1.0f - skew));
+		}
+	}
+	
 };
 
 #endif
