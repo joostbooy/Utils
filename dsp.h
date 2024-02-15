@@ -1,8 +1,6 @@
 #ifndef Dsp_h
 #define Dsp_h
 
-#include "stmf4lib.h"
-
 class Dsp {
 
 public:
@@ -16,29 +14,13 @@ public:
 		return a + (b - a) * mix;
 	}
 
-	template <typename type>
-	static inline type cross_fade(type a, type b, type c, float mix) {
-		return mix < 0.5f ? cross_fade(a, b, mix * 2.0f) : cross_fade(b, c, (mix - 0.5f) * 2.0f);
+	template<typename T>
+	static inline void hysterisis(T in, T *out, const T step_size) {
+		T diff = *out >= in ? *out - in : in - *out;
+		if (diff >= step_size) {
+			*out = in;
+		}
 	}
-
-	//template <typename type>
-	//static inline interpolate(type *data, float phase, uint32_t size, int inc = 1) {
-	//	uint32_t intergral = static_cast<uint32_t>(phase);
-	//	float fractional = phase - intergral;
-	//	return cross_fade(data[intergral], data[(intergral + inc) % size], fractional);
-	//}
-
-	//static inline float expf_approx(float x) {
-	//	x = 1.0f + x / 1024.0f;
-	//	x *= x; x *= x; x *= x; x *= x;
-	//	x *= x; x *= x; x *= x; x *= x;
-	//	x *= x; x *= x;
-	//	return x;
-	//}
-
-	//static inline float exp1(float x) {
-	//	return (6 + x * (6 + x * (3 + x))) * 0.16666666f;
-	//}
 
 	template <typename type>
 	static inline void pan(type* left, type* right, float pan) {
