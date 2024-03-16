@@ -14,6 +14,11 @@ public:
 		return a + (b - a) * mix;
 	}
 
+	template <typename type>
+	static inline type cross_fade(type a, type b, type c, float mix) {
+		return mix < 0.5f ? cross_fade(a, b, mix * 2.f) : cross_fade(b, c, (mix - 0.5f) * 2.f);
+	}
+
 	template<typename T>
 	static inline void hysterisis(T in, T *out, const T step_size) {
 		T diff = *out >= in ? *out - in : in - *out;
