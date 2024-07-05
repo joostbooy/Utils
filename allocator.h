@@ -1,7 +1,6 @@
 #ifndef Allocator_h
 #define Allocator_h
 
-#include "stmf4lib.h"
 
 template<typename type, const uint8_t kMaxEntries>
 class Allocator {
