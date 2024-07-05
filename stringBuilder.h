@@ -1,7 +1,8 @@
 #ifndef StringBuilder_h
 #define StringBuilder_h
 
-#include "stmf4lib.h"
+#include "stdlib.h"
+#include <stdint.h>
 
 class StringBuilder {
 
