@@ -27,6 +27,10 @@ public:
 		return (1.0f / 65535.0f) * u16();
 	}
 
+	static inline float reciprocal(float min, float max) {
+		return (reciprocal() * (max - min)) + min;
+	}
+
 	static inline uint16_t u16(uint16_t min, uint16_t max) {
 		if (min > max) {
 			swap(min, max);
