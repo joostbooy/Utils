@@ -1,6 +1,8 @@
 #ifndef Dsp_h
 #define Dsp_h
 
+#include <cmath>
+
 class Dsp {
 
 public:
@@ -73,14 +75,14 @@ public:
 		peak_ = 0.5f;
 	}
 
-	inline void process(type* data, int size, const int alligment = 1) {
+	inline void process(type* data, int size, const int inc = 1) {
 		while (size--) {
 			type s = *data;
 			float error = fabsf(s) - peak_;
 			peak_ += (error > 0 ? 0.05f : 0.00002f) * error;
 			float gain = (peak_ <= 1.0f ? 1.0f : 1.0f / peak_);
 			*data = s * gain * 0.8f;
-			data += alligment;
+			data += inc;
 		}
 	}
 
