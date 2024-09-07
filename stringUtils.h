@@ -38,6 +38,16 @@ public:
 		return (*a == '\0') && (*b == '\0');
 	}
 
+	static void remove_extension(char* text) {
+		while (*text != '\0') {
+			if (*text == '.') {
+				*text = '\0';
+				return;
+			}
+			++text;
+		}
+	}
+	
 	static void split_extension(const char* text, char* to_path, char* to_extension) {
 		while (*text != '\0' && *text != '.') {
 			*to_path++ = *text++;
