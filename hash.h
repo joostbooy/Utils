@@ -2,6 +2,8 @@
 #define Hash_h
 
 // Westlicht fnvHash
+#include <cstdint>
+#include <cstddef>
 
 class Hash {
 
@@ -13,6 +15,11 @@ public:
 
 	uint32_t read() {
 		return hash_;
+	}
+
+	template<typename T>
+	void write(T& data) {
+		write(&data, sizeof(T));
 	}
 
 	void write(void *data, size_t size) {

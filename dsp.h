@@ -47,47 +47,6 @@ public:
 		*left = left_ * amp_left + right_ * (1.0f - amp_right);
 		*right = right_ * amp_right + left_ * (1.0f - amp_left);
 	}
-
-	// Laurent de Sora & Pinchenettes
-	static inline float ReadHermite(int16_t* data, uint32_t integral, float fractional) {
-		float xm1 = data[integral];
-		float x0 = data[integral + 1];
-		float x1 = data[integral + 2];
-		float x2 = data[integral + 3];
-		float scale = 1.0f / 32768.0f;
-
-		const float c = (x1 - xm1) * 0.5f;
-		const float v = x0 - x1;
-		const float w = c + v;
-		const float a = w + v + (x2 - x0) * 0.5f;
-		const float b_neg = w + a;
-		return ((((a * fractional) - b_neg) * fractional + c) * fractional + x0) * scale;
-	}
-};
-
-
-// Pinchenettes
-template<typename type>
-class Limiter {
-public:
-
-	inline void init() {
-		peak_ = 0.5f;
-	}
-
-	inline void process(type* data, int size, const int inc = 1) {
-		while (size--) {
-			type s = *data;
-			float error = fabsf(s) - peak_;
-			peak_ += (error > 0 ? 0.05f : 0.00002f) * error;
-			float gain = (peak_ <= 1.0f ? 1.0f : 1.0f / peak_);
-			*data = s * gain * 0.8f;
-			data += inc;
-		}
-	}
-
-private:
-	float peak_ = 0.5f;
 };
 
 #endif
