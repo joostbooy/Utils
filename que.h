@@ -68,7 +68,8 @@ public:
 			for (size_t i = index; i < size_; i++) {
 				peek(i) = peek(i + 1);
 			}
-			write_pos_ = (write_pos_ - 1) % kMaxSize;
+			size_t pos = write_pos_;
+			write_pos_ = (pos - 1) % kMaxSize;
 		}
 	}
 
