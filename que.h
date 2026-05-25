@@ -47,7 +47,7 @@ public:
 		return value;
 	}
 
-	inline T peek(size_t pos = 0) {
+	inline T& peek(size_t pos = 0) {
 		return data[(read_pos_ + pos) % kMaxSize];
 	}
 
@@ -59,6 +59,16 @@ public:
 		if (readable()) {
 			size_t pos = read_pos_;
 			read_pos_ = (pos + 1) % kMaxSize;
+		}
+	}
+
+	inline void remove(size_t index) {
+		size_t size_ = size();
+		if (index < size_) {
+			for (size_t i = index; i < size_; i++) {
+				peek(i) = peek(i + 1);
+			}
+			write_pos_ = (write_pos_ - 1) % kMaxSize;
 		}
 	}
 
