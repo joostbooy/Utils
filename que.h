@@ -23,11 +23,11 @@ public:
 	}
 
 	inline size_t size() {
-		return (write_pos_ - read_pos_) % kMaxSize;
+		return (kMaxSize + write_pos_ - read_pos_) % kMaxSize;
 	}
 
 	inline size_t available_size() {
-		return kMaxSize - size();
+		return kMaxSize - 1 - size();
 	}
 
 	inline void clear() {
