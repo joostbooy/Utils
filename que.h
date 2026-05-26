@@ -51,10 +51,6 @@ public:
 		return data[(read_pos_ + pos) % kMaxSize];
 	}
 
-	inline T* pointer() {
-		return &data[read_pos_];
-	}
-
 	inline void swallow() {
 		if (readable()) {
 			size_t pos = read_pos_;
